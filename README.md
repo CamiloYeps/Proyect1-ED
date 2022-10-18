@@ -1,3 +1,5 @@
 # Proyect1-ED
-# Integrantes:
-#
+ Integrantes:
+Alexander Caballero
+Nahin Mendoza
+Camilo Yepes
