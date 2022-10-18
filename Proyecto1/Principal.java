@@ -6,6 +6,7 @@ public class Principal {
         //Creacion de objetos
         Scanner leer = new Scanner(System.in);
         HojaPresentacion objPresentacion = new HojaPresentacion();
+        OperacionPila objpila = new OperacionPila();
         //Declaracion de las variables
         int opc;
         
@@ -27,7 +28,7 @@ public class Principal {
                 break;
             }
             case 2: {
-                objPresentacion.Presentacion();
+                objpila.Pila();
                 break;
             }
             case 3: {
