@@ -21,6 +21,8 @@ public class HojaPresentacion {
         System.out.print("\n");
         System.out.print("\n");
         System.out.println("\t\t\t\tIntegrantes:");
+        System.out.println("\t\t\tAlexander Caballero: 8-997-2227");
+        System.out.println("\t\t\t  Nahin Mendoza: 8-898-50");
         System.out.println("\t\t\t  Camilo Yepes: 20-14-6092");
         System.out.print("\n");
         System.out.print("\n");
