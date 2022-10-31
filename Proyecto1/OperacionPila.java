@@ -1,10 +1,7 @@
 import java.util.*;
 
 public class OperacionPila {
-    public void Pila() {
-        //Declaracion de objeto de lectura
-        InsertarPila insertar = new InsertarPila();
-        EliminarPila eliminar = new EliminarPila();
+    public static void Pila() {
         //Declaracion de las variables
         int eleccion, max = 5, tope = -1;
         String[] pila = new String[max];
@@ -24,10 +21,10 @@ public class OperacionPila {
             eleccion = obtener.nextInt();
 
             if (eleccion == 1) {
-                insertar.push(pila,max,tope);
+                Pila.push(pila,max,tope);
             }
             else if (eleccion == 2) {
-                eliminar.pop(pila, tope);
+                Pila.pop(pila, tope);
             }
             else if (eleccion == 3) {
                 for (int i = tope; i <= tope; tope--) {
@@ -37,7 +34,7 @@ public class OperacionPila {
                 }
             }
             else {
-                validar = false;
+                System.out.println("Saliendo de Operaciones con Pila");
             } //fin if
             obtener.close();//cerrar objeto de lectura
         }//fin while

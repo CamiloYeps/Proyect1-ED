@@ -1,7 +1,7 @@
 import java.util.*;
 
-public class InsertarPila {
-    public void push(String[] pila, int maximo, int tope) {
+public class Pila {
+    public static void push(String[] pila, int maximo, int tope) {
         //Crear objeto de lectura
         Scanner leer = new Scanner(System.in);
 
@@ -15,4 +15,15 @@ public class InsertarPila {
         } //fin if
         leer.close();
     }//fin metodo push
-}//fin class InsertarPila
+
+    public static void pop(String[] pila, int tope) {
+        
+        if (tope == -1) {
+            System.out.println("ERROR: subdesbordamiento pila vacia");
+        }
+        else if (tope != -1) {
+            String dato = pila[tope];
+            tope = tope - 1;
+        }//fin if
+    }// fin metodo pop
+}
