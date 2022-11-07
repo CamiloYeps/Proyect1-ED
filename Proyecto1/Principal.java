@@ -19,6 +19,7 @@ public class Principal {
             System.out.println("\t 4. Operaciones con Cola Circular");
             System.out.println("\t 5. Salir del Programa");
             System.out.print("\t Escoga una opcion: ");
+            System.out.println("\n");
 
             opc = leer.nextInt();
 
