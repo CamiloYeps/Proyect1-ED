@@ -1,5 +1,13 @@
 public class Jugadores {
     public int x, y;
+    
+    public static void Jugador1() {
+
+    }//fin Jugador1
+    
+    public static void Jugador2() {
+        
+}//fin Jugador2
 
     //Constructor
     public Jugadores() {
