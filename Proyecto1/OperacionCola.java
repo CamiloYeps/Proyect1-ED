@@ -1,32 +1,66 @@
-import java.util.Scanner;
-
+import java.io.*;
 
 public class OperacionCola {
-    public void InsertElementCola(String variable) {
+    public static void Cola() throws IOException {
         //Crear objeto de lectura
-        Scanner leer = new Scanner(System.in);
+        BufferedReader obtener = new BufferedReader(new InputStreamReader(System.in));
+        //Declaracion de variables
+        int frente = -1, fin = -1, max = 5;
+        String[] cola = new String[max];
+        String dato;
+        boolean validar = true;
 
-        System.out.println("Menu");
-        System.out.println("Operaciones con Cola");
+        while(validar) {
 
-        System.out.println("1. Insertar Elementos a la Cola");
-        System.out.println("2. Eliminar Elementos de la Cola");
-        System.out.println("3. Mostrar la Cola");
-        System.out.println("4. Retonar al Menu Principal");
-        int opc = leer.nextInt();
+            System.out.println("\t\t\t\t Menu");
+            System.out.println("\t\t    Operaciones con Cola");
 
-        if (opc == 1) {
-            
-        }
-        else if (opc == 2) {
+            System.out.println("1. Insertar Elementos a la Cola");
+            System.out.println("2. Eliminar Elementos de la Cola");
+            System.out.println("3. Mostrar la Cola");
+            System.out.println("4. Retonar al Menu Principal");
+            System.out.print("\t Escoga una opcion: ");
+            int opc = Integer.parseInt(obtener.readLine());
 
-        }
-        else if (opc == 3) {
-
-        }
-        else {
-
-        }
-        leer.close();
-    }//fin metodo InsertElementCola
+            if (opc == 1) {
+                if (fin == (max - 1)) {
+                    System.out.println("ERROR: desbordamiento cola llena");
+                }
+                else if (fin < (max - 1)) {
+                    fin++;
+                    System.out.println("Inserte los elementos en la cola: ");
+                    cola[fin] = obtener.readLine();
+                    if (fin == 0) {
+                        frente = 0;
+                    }//fin if
+                }//fin if
+            }
+            else if (opc == 2) {
+                if (frente == -1 && fin == -1) {
+                    System.out.println("ERROR: subdesbordamiento cola vacia");
+                }
+                else if (frente <= fin) {
+                    dato = cola[frente];
+                    System.out.println("Se ha eliminado un elemento de la cola");
+                    if (frente == fin) {
+                        frente = -1;
+                        fin = -1;
+                    }
+                    else {
+                        frente++;
+                    }//fin if
+                }//fin if
+            }
+            else if (opc == 3) {
+                System.out.println("Los Elementos de la cola son:");
+                for (int i = frente; i <= fin; i++) {
+                    System.out.print(cola[i] + " ");
+                }
+            }
+            else {
+                System.out.println("Saliendo de Operaciones con Cola");
+                validar = false;
+            }//fin if
+        }//fin while
+    }//fin metodo Cola
 }//fin class OperacionCola

@@ -1,10 +1,10 @@
-import java.util.Scanner;
+import java.io.*;
 
 public class Principal {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //Creacion de objetos
-        Scanner leer = new Scanner(System.in);
+        BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
         HojaPresentacion objPresentacion = new HojaPresentacion();
         //Declaracion de las variables
         int opc;
@@ -19,9 +19,8 @@ public class Principal {
             System.out.println("\t 4. Operaciones con Cola Circular");
             System.out.println("\t 5. Salir del Programa");
             System.out.print("\t Escoga una opcion: ");
+            opc = Integer.parseInt(leer.readLine());
             System.out.println("\n");
-
-            opc = leer.nextInt();
 
             switch (opc) {
                 case 1: {
@@ -33,7 +32,7 @@ public class Principal {
                     break;
                 }
                 case 3: {
-                    objPresentacion.Presentacion();
+                    OperacionCola.Cola();
                     break;
                 }
                 case 4: {
