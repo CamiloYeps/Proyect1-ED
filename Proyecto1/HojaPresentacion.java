@@ -1,6 +1,6 @@
 public class HojaPresentacion {
 
-    public void Presentacion(){
+    public static void Presentacion(){
         System.out.println("\t\t\t UNIVERSIDAD TECNOLOGICA DE PANAMA");
         System.out.println("\t\t FACULTAD DE INGENIERIA DE SISTEMA COMPUTACIONALES");
         System.out.println("\t\tDEPARTAMENTO DE COMPUTACION Y SIMULACION DE SISTEMAS");
@@ -13,7 +13,7 @@ public class HojaPresentacion {
         System.out.print("\n");
         System.out.print("\n");
         System.out.println("\t\t\t\tPROYECTO No1");
-        System.out.println("\t\t\t   OPERACIONES CON PILA Y COLAS");
+        System.out.println("\t\t\t  OPERACIONES CON PILA Y COLAS");
         System.out.print("\n");
         System.out.print("\n");
         System.out.print("\n");
@@ -27,7 +27,8 @@ public class HojaPresentacion {
         System.out.print("\n");
         System.out.print("\n");
         System.out.print("\n");
-        System.out.println("\t\t\t\t--------");
+        System.out.println("\t\t\t     16 - noviembre - 2022");
         System.out.println("\t\t\t\tII SEMESTRE");
+        System.out.println("\n");
     }//fin metodo presentacion
 }//fin class HojaPresentacion
