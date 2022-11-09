@@ -1,7 +1,5 @@
 import java.io.*;
 
-import javax.xml.validation.Validator;
-
 public class OperacionCola {
     public static void Cola() throws IOException {
         //Crear objeto de lectura
