@@ -42,6 +42,8 @@ public class Principal {
                     }
                     case 5: {
                         System.out.println("\t Que tenga un buen dia");
+                        validar = false;
+                        break;
                     }
                     default: {
                         System.out.println("\t ERROR: opcion invalida, intente nuevamente");
