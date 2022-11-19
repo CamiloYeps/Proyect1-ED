@@ -1,70 +1,73 @@
 import java.io.*;
-import java.util.ArrayList;
 
 public class Quoridor {
     public static void main(String[] args) throws IOException {
         //Crear objetos
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        Variables objvar = new Variables();
+        Jugadores jug1 = new Jugadores();
+        Jugadores jug2 = new Jugadores();
 
         //Declaracion de variables
-        int cont = 0, coordenadaX, coordenadaY;
+        int cont = 0;
         boolean gameover = true;
-        String nombre, opc;
-        ArrayList <ArrayList <Integer> > moveregisters1 = new ArrayList <ArrayList <Integer> >();
-        ArrayList <ArrayList <Integer> > moveregisters2 = new ArrayList <ArrayList <Integer> >();
+        String opc;
         
         //Imprimir el tablero Quoridor
-        Tablero.CrearTablero();
+        Tablero.CrearTablero(jug1, jug2);
         System.out.println("\n");
         
         while (gameover) {
             try {
-                cont++;
-                if ((cont % 2) == 1) {
-                    nombre = "jugador 1";
-                    System.out.println("Turno del " + nombre);
-                }
-                else {
-                    nombre = "jugador 2";
-                    System.out.println("Turno del " + nombre);
-                }//fin if
-
                 System.out.println("1. Mover ficha");
                 System.out.println("2. Poner muro");
                 System.out.print("Elija su opcion: ");
                 opc = reader.readLine();
 
-                if (opc.equals("1")) {
-                    System.out.println("Digite las coordenas en donde quiere que se mueva la ficha: ");
-                    System.out.println("Digite la coordenada y: ");
-                    coordenadaY = Integer.parseInt(reader.readLine());
-
-                    System.out.println("Digite la coordenada x: ");
-                    coordenadaX = Integer.parseInt(reader.readLine());
-
-                    //Verfica si ha llegado a la ultima linea del tablero
-                    if (coordenadaY == 8) {
-                        System.out.println("El ganador es: " + nombre);
-                        gameover = false;
-                    } //fin if
+                //Compara si los jugadores ha introducido EXIT
+                if (opc.equalsIgnoreCase("EXIT") && objvar.jugador1.equals("jugador 1")) {
+                    System.out.println("El ganador es el " + objvar.jugador2);
+                    gameover = false;
                 }
-                else if (opc.equals("2")) {
-                    System.out.println("Como desea poner el muro");
-                    System.out.println("1. Vertical");
-                    System.out.println("2. Horizontal");
-                    opc = reader.readLine();
-                    if (opc.equals("1")) {
-
-                    }
-                    else {
-                        
-                    }//fin if
-                }
-                else if (opc.equalsIgnoreCase("EXIT")) {
-                    System.out.println("Partida interrumpida");
+                else if (opc.equalsIgnoreCase("EXIT") && objvar.jugador1.equals("jugador 2")){
+                    System.out.println("El ganador es el " + objvar.jugador1);
                     gameover = false;
                 }//fin if
+
+                switch (opc) {
+                    case "1":
+                        cont++;
+                        if ((cont % 2) == 1) {
+                            System.out.println("Turno del " + objvar.jugador1);
+
+                            System.out.println("1. Mover hacia arriba");
+                            System.out.println("2. Mover hacia izquierda");
+                            System.out.println("3. Mover hacia derecha");
+                            System.out.println("4. Mover hacia abajo");
+
+                            opc = reader.readLine();
+                            jug1.MoverFichaJugador1(opc);
+                            Tablero.CrearTablero(jug1,jug2);
+                        }
+                        else {
+                            System.out.println("Turno del " + objvar.jugador2);
+                            
+                            System.out.println("1. Mover hacia arriba");
+                            System.out.println("2. Mover hacia izquierda");
+                            System.out.println("3. Mover hacia derecha");
+                            System.out.println("4. Mover hacia abajo");
+
+                            opc = reader.readLine();
+                            jug2.MoverFichaJugador2(opc);
+                            Tablero.CrearTablero(jug1,jug2);
+                        }//fin if
+                        break;
+                
+                    default:
+                        break;
+                }//fin switch case
             } catch (Exception e) {
+                cont--;
                 System.out.println("Ha insertado una opcion incorrecta");
                 gameover = true;
             }//fin try-catch
