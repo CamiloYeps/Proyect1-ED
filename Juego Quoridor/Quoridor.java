@@ -19,8 +19,16 @@ public class Quoridor {
         
         while (gameover) {
             try {
+                cont++;
+                if ((cont % 2) == 1) {
+                    System.out.println("Turno del " + objvar.jugador1);
+                }
+                else {
+                    System.out.println("Turno del " + objvar.jugador2);
+                }//fin if
                 System.out.println("1. Mover ficha");
                 System.out.println("2. Poner muro");
+                System.out.println("EXIT para retirarse");
                 System.out.print("Elija su opcion: ");
                 opc = reader.readLine();
 
@@ -36,10 +44,8 @@ public class Quoridor {
 
                 switch (opc) {
                     case "1":
-                        cont++;
                         if ((cont % 2) == 1) {
-                            System.out.println("Turno del " + objvar.jugador1);
-
+                            System.out.println("\nTURNO DEL JUGADOR 1");
                             System.out.println("1. Mover hacia arriba");
                             System.out.println("2. Mover hacia izquierda");
                             System.out.println("3. Mover hacia derecha");
@@ -50,8 +56,7 @@ public class Quoridor {
                             Tablero.CrearTablero(jug1,jug2);
                         }
                         else {
-                            System.out.println("Turno del " + objvar.jugador2);
-                            
+                            System.out.println("\nTURNO DEL JUGADOR 2");
                             System.out.println("1. Mover hacia arriba");
                             System.out.println("2. Mover hacia izquierda");
                             System.out.println("3. Mover hacia derecha");
