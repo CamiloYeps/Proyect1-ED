@@ -33,8 +33,8 @@ public class Tablero {
                 } //fin for
                 if (i != 9) {
                     
-                    System.out.print("\n" + i + "+---+");
-                    for (int k = 1; k <= 8; k++) {
+                    System.out.print("\n" + i + "+");
+                    for (int k = 1; k <= 9; k++) {
                         if (x2 - x1 == 1) {
                             if (i == y1 && k == x1) {
                                 System.out.print("####");
