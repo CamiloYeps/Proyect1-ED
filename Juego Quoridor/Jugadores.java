@@ -9,52 +9,82 @@ public class Jugadores {
         coory2 = 1;
     }//fin constructor
 
-    public void MoverFichaJugador1(String opcion) {
+    public boolean MoverFichaJugador1(String opcion, boolean validar) {
         if (opcion.equals("1")) {
             coory1--;
+            validar = true;
         }
         else if (opcion.equals("2")) {
             coorx1--;
+            validar = true;
             if (coorx1 == 0) {
                 coorx1++;
+                System.out.println("Ficha no movida");
+                validar = false;
             }//fin if
         }
         else if (opcion.equals("3")) {
             coorx1++;
+            validar = true;
             if (coorx1 == 10) {
                 coorx1--;
+                System.out.println("Ficha no movida");
+                validar = false;
+            }//fin if
+        }
+        else if (opcion.equals("4")) {
+            coory1++;
+            validar = true;
+            if (coory1 == 10) {
+                coory1--;
+                System.out.println("Ficha no movida");
+                validar = false;
             }//fin if
         }
         else {
-            coory1++;
-            if (coory1 == 10) {
-                coory1--;
-            }//fin if
+            System.out.println("Ha introducido una opcion incorrecta, intentelo nuevamente");
+            validar = false;
         }//fin if
+        return validar;
     }//fin método MoverFichaJugador1
 
-    public void MoverFichaJugador2(String opcion) {
+    public boolean MoverFichaJugador2(String opcion, boolean validar) {
         if (opcion.equals("1")) {
-            coory2++;
+            coory2--;
+            validar = true;
             if (coory2 == 0) {
-                coory2--;
-            }
+                coory2++;
+                System.out.println("Ficha no movida");
+                validar = false;
+            }//fin if
         }
         else if (opcion.equals("2")) {
             coorx2--;
+            validar = true;
             if (coorx2 == 0) {
                 coorx2--;
+                System.out.println("Ficha no movida");
+                validar = false;
             }//fin if
         }
         else if (opcion.equals("3")) {
             coorx2++;
+            validar = true;
             if (coorx2 == 10) {
                 coorx2--;
+                System.out.println("Ficha no movida");
+                validar = false;
             }//fin if
         }
-        else {
+        else if (opcion.equals("4")) {
             coory2++;
+            validar = true;
         }
+        else {
+            System.out.println("Ha introducido una opcion incorrecta, intentelo nuevamente");
+            validar = false;
+        }
+        return validar;
     }//fin método MoverFichaJugador2
 
     //Método para obtener el valor de la posicion x1

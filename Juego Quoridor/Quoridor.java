@@ -14,12 +14,13 @@ public class Quoridor {
         String opc;
         
         //Imprimir el tablero Quoridor
-        Tablero.CrearTablero(jug1, jug2);
+        Tablero.CrearTablero(jug1, jug2, objvar.coordenadaX1, objvar.coordenadaY1, objvar.coordenadaX2, objvar.coordenadaY2);
         System.out.println("\n");
         
         while (gameover) {
             try {
                 cont++;
+                boolean validar = false;
                 if ((cont % 2) == 1) {
                     System.out.println("Turno del " + objvar.jugador1);
                 }
@@ -45,30 +46,83 @@ public class Quoridor {
                 switch (opc) {
                     case "1":
                         if ((cont % 2) == 1) {
-                            System.out.println("\nTURNO DEL JUGADOR 1");
-                            System.out.println("1. Mover hacia arriba");
-                            System.out.println("2. Mover hacia izquierda");
-                            System.out.println("3. Mover hacia derecha");
-                            System.out.println("4. Mover hacia abajo");
+                            while (!validar) {
+                                System.out.println("1. Mover hacia ARRIBA");
+                                System.out.println("2. Mover hacia IZQUIERDA");
+                                System.out.println("3. Mover hacia DERECHA");
+                                System.out.println("4. Mover hacia ABAJO");
 
-                            opc = reader.readLine();
-                            jug1.MoverFichaJugador1(opc);
-                            Tablero.CrearTablero(jug1,jug2);
+                                opc = reader.readLine();
+                                validar = jug1.MoverFichaJugador1(opc,validar);
+                            }
+                            Tablero.CrearTablero(jug1, jug2, objvar.coordenadaX1, objvar.coordenadaY1, objvar.coordenadaX2, objvar.coordenadaY2);
+
+                            //Compara si el jugador1 ha llagado a la primera fila del tablero
+                            if (jug1.getY1() == 1) {
+                                System.out.println("El " + objvar.jugador1 + " ha ganado la partida");
+                                gameover = false;
+                            }
                         }
                         else {
-                            System.out.println("\nTURNO DEL JUGADOR 2");
-                            System.out.println("1. Mover hacia arriba");
-                            System.out.println("2. Mover hacia izquierda");
-                            System.out.println("3. Mover hacia derecha");
-                            System.out.println("4. Mover hacia abajo");
+                            while (!validar) {
+                                System.out.println("1. Mover hacia ARRIBA");
+                                System.out.println("2. Mover hacia IZQUIERDA");
+                                System.out.println("3. Mover hacia DERECHA");
+                                System.out.println("4. Mover hacia ABAJO");
 
-                            opc = reader.readLine();
-                            jug2.MoverFichaJugador2(opc);
-                            Tablero.CrearTablero(jug1,jug2);
+                                opc = reader.readLine();
+                                validar = jug2.MoverFichaJugador2(opc,validar);
+                            }
+                            Tablero.CrearTablero(jug1, jug2, objvar.coordenadaX1, objvar.coordenadaY1, objvar.coordenadaX2, objvar.coordenadaY2);
+
+                            //Compara si el jugador2 ha llagado a la primera fila del tablero
+                            if (jug2.getY2() == 9) {
+                                System.out.println("El " + objvar.jugador1 + " ha ganado la partida");
+                                gameover = false;
+                            }
                         }//fin if
                         break;
-                
+                    case "2": {
+                        while (!validar) {
+                            try {
+                                System.out.println("Introduzca las coordenadas donde desee colocar el muro");
+                                System.out.print("Coordenada x1: ");
+                                objvar.coordenadaX1 = Integer.parseInt(reader.readLine());
+                                System.out.print("Coordenada y1: ");
+                                objvar.coordenadaY1 = Integer.parseInt(reader.readLine());
+
+                                System.out.print("Coordenada x2: ");
+                                objvar.coordenadaX2 = Integer.parseInt(reader.readLine());
+                                System.out.print("Coordenada y2: ");
+                                objvar.coordenadaY2 = Integer.parseInt(reader.readLine());
+
+                                //Comprobar de que las coordenadas no se pasen del rango del tablero
+                                if ((objvar.coordenadaX1 > 0 && objvar.coordenadaX1 < 9
+                                    && objvar.coordenadaY1 > 0 && objvar.coordenadaY1 < 9) || (objvar.coordenadaX2 > 0 && objvar.coordenadaX2 < 9 && objvar.coordenadaY2 > 0 && objvar.coordenadaY2 < 9)) {
+                                    
+                                    //Comprueba que los muros no ocupen más de dos casilla y si los muros son verticales
+                                    if (objvar.coordenadaX2 - objvar.coordenadaX1 == 1 || objvar.coordenadaY2 - objvar.coordenadaY1 == 1) {
+                                        validar = true;
+                                    }
+                                    else {
+                                        System.out.println("Error al colocar los muros, intentelo nuevamente");
+                                        validar = false;
+                                    }//fin if
+                                }
+                                else {
+                                    System.out.println("Las coordenadas no pueden superar el rango 9");
+                                }//fin if
+                            } catch (Exception e) {
+                                System.out.println("Introduzca bien las coordenadas");
+                                validar = false;
+                            }//fin try-catch
+                        } //fin while
+                        Tablero.CrearTablero(jug1, jug2, objvar.coordenadaX1, objvar.coordenadaY1, objvar.coordenadaX2, objvar.coordenadaY2);
+                        break;
+                    }
                     default:
+                        System.out.println("Opcion invalida");
+                        cont--;
                         break;
                 }//fin switch case
             } catch (Exception e) {
