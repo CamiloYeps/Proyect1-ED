@@ -87,33 +87,64 @@ public class Quoridor {
                     case "2": {
                         while (!validar) {
                             try {
-                                System.out.println("Introduzca las coordenadas donde desee colocar el muro");
-                                System.out.print("Coordenada x1: ");
-                                objvar.coordenadaX1 = Integer.parseInt(reader.readLine());
-                                System.out.print("Coordenada y1: ");
-                                objvar.coordenadaY1 = Integer.parseInt(reader.readLine());
+                                if ((cont % 2) == 1) {
+                                    System.out.println("Introduzca las coordenadas donde desee colocar el muro");
+                                    System.out.print("Coordenada x1: ");
+                                    objvar.coordenadaX1 = Integer.parseInt(reader.readLine());
+                                    System.out.print("Coordenada y1: ");
+                                    objvar.coordenadaY1 = Integer.parseInt(reader.readLine());
 
-                                System.out.print("Coordenada x2: ");
-                                objvar.coordenadaX2 = Integer.parseInt(reader.readLine());
-                                System.out.print("Coordenada y2: ");
-                                objvar.coordenadaY2 = Integer.parseInt(reader.readLine());
+                                    System.out.print("Coordenada x2: ");
+                                    objvar.coordenadaX2 = Integer.parseInt(reader.readLine());
+                                    System.out.print("Coordenada y2: ");
+                                    objvar.coordenadaY2 = Integer.parseInt(reader.readLine());
 
-                                //Comprobar de que las coordenadas no se pasen del rango del tablero
-                                if ((objvar.coordenadaX1 > 0 && objvar.coordenadaX1 < 9
-                                    && objvar.coordenadaY1 > 0 && objvar.coordenadaY1 < 9) || (objvar.coordenadaX2 > 0 && objvar.coordenadaX2 < 9 && objvar.coordenadaY2 > 0 && objvar.coordenadaY2 < 9)) {
-                                    
-                                    //Comprueba que los muros no ocupen más de dos casilla y si los muros son verticales
-                                    if (objvar.coordenadaX2 - objvar.coordenadaX1 == 1 || objvar.coordenadaY2 - objvar.coordenadaY1 == 1) {
-                                        validar = true;
+                                    //Comprobar de que las coordenadas no se pasen del rango del tablero
+                                    if ((objvar.coordenadaX1 > 0 && objvar.coordenadaX1 < 9
+                                        && objvar.coordenadaY1 > 0 && objvar.coordenadaY1 < 9) || (objvar.coordenadaX2 > 0 && objvar.coordenadaX2 < 9 && objvar.coordenadaY2 > 0 && objvar.coordenadaY2 < 9)) {
+                                        
+                                        //Comprueba que los muros no ocupen más de dos casilla y si los muros son verticales
+                                        if (objvar.coordenadaX2 - objvar.coordenadaX1 == 1 || objvar.coordenadaY2 - objvar.coordenadaY1 == 1) {
+                                            validar = true;
+                                        }
+                                        else {
+                                            System.out.println("Error al colocar los muros, intentelo nuevamente");
+                                            validar = false;
+                                        }//fin if
                                     }
                                     else {
-                                        System.out.println("Error al colocar los muros, intentelo nuevamente");
-                                        validar = false;
+                                        System.out.println("Las coordenadas no pueden superar el rango 9");
                                     }//fin if
                                 }
                                 else {
-                                    System.out.println("Las coordenadas no pueden superar el rango 9");
-                                }//fin if
+                                    System.out.println("Introduzca las coordenadas donde desee colocar el muro");
+                                    System.out.print("Coordenada x1: ");
+                                    objvar.coordenadaX1 = Integer.parseInt(reader.readLine());
+                                    System.out.print("Coordenada y1: ");
+                                    objvar.coordenadaY1 = Integer.parseInt(reader.readLine());
+
+                                    System.out.print("Coordenada x2: ");
+                                    objvar.coordenadaX2 = Integer.parseInt(reader.readLine());
+                                    System.out.print("Coordenada y2: ");
+                                    objvar.coordenadaY2 = Integer.parseInt(reader.readLine());
+
+                                    //Comprobar de que las coordenadas no se pasen del rango del tablero
+                                    if ((objvar.coordenadaX1 > 0 && objvar.coordenadaX1 < 9
+                                        && objvar.coordenadaY1 > 0 && objvar.coordenadaY1 < 9) || (objvar.coordenadaX2 > 0 && objvar.coordenadaX2 < 9 && objvar.coordenadaY2 > 0 && objvar.coordenadaY2 < 9)) {
+                                        
+                                        //Comprueba que los muros no ocupen más de dos casilla y si los muros son verticales
+                                        if (objvar.coordenadaX2 - objvar.coordenadaX1 == 1 || objvar.coordenadaY2 - objvar.coordenadaY1 == 1) {
+                                            validar = true;
+                                        }
+                                        else {
+                                            System.out.println("Error al colocar los muros, intentelo nuevamente");
+                                            validar = false;
+                                        }//fin if
+                                    }
+                                    else {
+                                        System.out.println("Las coordenadas no pueden superar el rango 9");
+                                    }//fin if
+                                }//fin if 
                             } catch (Exception e) {
                                 System.out.println("Introduzca bien las coordenadas");
                                 validar = false;
