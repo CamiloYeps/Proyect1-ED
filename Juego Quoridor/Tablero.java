@@ -8,7 +8,7 @@ public class Tablero {
         System.out.println(" -------------------------------------");
         while (true) {
             for (int i = 1; i <= 9; i++) {
-                System.out.print(" |");
+                System.out.print(i + "|");
                 for (int j = 1; j <= 9; j++) {
                     if (i == jug1.getY1() && j == jug1.getX1()) {
                         System.out.print(ANSI_RED + " o " + ANSI_RESET + "|");
@@ -33,7 +33,7 @@ public class Tablero {
                 } //fin for
                 if (i != 9) {
                     
-                    System.out.print("\n" + i + "+");
+                    System.out.print("\n +");
                     for (int k = 1; k <= 9; k++) {
                         if (x2 - x1 == 1) {
                             if (i == y1 && k == x1) {
@@ -56,7 +56,7 @@ public class Tablero {
             System.out.println(" -------------------------------------");
             break;
         }//fin while
-      System.out.println("     1   2   3   4   5   6   7   8");
+      System.out.println("   1   2   3   4   5   6   7   8   9");
     }//fin método CrearTablero
 
     /*//Método para mover las fichas en el tablero

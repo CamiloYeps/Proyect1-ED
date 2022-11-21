@@ -51,10 +51,11 @@ public class Quoridor {
                                 System.out.println("2. Mover hacia IZQUIERDA");
                                 System.out.println("3. Mover hacia DERECHA");
                                 System.out.println("4. Mover hacia ABAJO");
+                                System.out.print("En que direccion desea desplazar la ficha: ");
 
                                 opc = reader.readLine();
                                 validar = jug1.MoverFichaJugador1(opc,validar);
-                            }
+                            }//fin if
                             Tablero.CrearTablero(jug1, jug2, objvar.coordenadaX1, objvar.coordenadaY1, objvar.coordenadaX2, objvar.coordenadaY2);
 
                             //Compara si el jugador1 ha llagado a la primera fila del tablero
@@ -69,10 +70,11 @@ public class Quoridor {
                                 System.out.println("2. Mover hacia IZQUIERDA");
                                 System.out.println("3. Mover hacia DERECHA");
                                 System.out.println("4. Mover hacia ABAJO");
+                                System.out.print("En que direccion desea desplazar la ficha: ");
 
                                 opc = reader.readLine();
                                 validar = jug2.MoverFichaJugador2(opc,validar);
-                            }
+                            }//fin while
                             Tablero.CrearTablero(jug1, jug2, objvar.coordenadaX1, objvar.coordenadaY1, objvar.coordenadaX2, objvar.coordenadaY2);
 
                             //Compara si el jugador2 ha llagado a la primera fila del tablero
