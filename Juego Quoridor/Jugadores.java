@@ -4,11 +4,11 @@ public class Jugadores {
     public int coorx1, coory1, coorx2, coory2;
 
     //Constructor
-    public Jugadores() {
-        coorx1 = 4;
-        coory1 = 17;
-        coorx2 = 4;
-        coory2 = 1;
+    public Jugadores(int x1, int y1, int x2, int y2) {
+        coorx1 = x1;
+        coory1 = y1;
+        coorx2 = x2;
+        coory2 = y2;
     }//fin constructor
 
     public boolean MoverFichaJugador1(String opcion, boolean validar) {

@@ -8,7 +8,8 @@ public class Tablero {
     //Declaracion de variables
     String[][] tablero = new String[19][9];
 
-    public void CrearTablero(Jugadores jug1, Jugadores jug2, int x1, int y1, int x2, int y2) {
+    public void CrearTablero(Jugadores jug1, Jugadores jug2, int[][] muros1) {
+        int cont1 = 0, cont2 = 0;
         //Cargar el tablero
         for (int i = 0; i < 19; i++) {
             for (int j = 0; j < 9; j++) {
@@ -29,24 +30,44 @@ public class Tablero {
                 else if (i == jug2.getY2() && j == jug2.getX2()) {
                     tablero[i][j] = (" o |");
                 } //fin if
-                
-                //Comprueba que los muros sean verticales
-                if ((x1 + x2) % 2 == 0 && y2 - y1 == 2) {
-                    if (i == y1 && j == x1) {
-                        tablero[i][j] = "   #";
-                    }
-                    else if (i == y2 && j == x2) {
-                        tablero[i][j] = "   #";
+                while(cont1 != 20) {
+                    //Comprueba que los muros sean verticales
+                    if ((muros1[cont1][0] + muros1[cont1+1][0]) % 2 == 0 && muros1[cont1+1][1] - muros1[cont1][1] == 2) {
+                        if (i == muros1[cont1][1] && j == muros1[cont1][0]) {
+                            tablero[i][j] = "   #";
+                        }
+                        else if (i == muros1[cont1+1][1] && j == muros1[cont1+1][0]) {
+                            tablero[i][j] = "   #";
+                        } //fin if
                     } //fin if
-                } //fin if
-                else if ((x2 + x1) % 2 == 0 && y2 - y1 == -2) {
-                    if (i == y2 && j == x2) {
-                        tablero[i][j] = "   #";
-                    }
-                    else if (i == y1 && j == x1) {
-                        tablero[i][j] = "   #";
+                    else if ((muros1[cont1+1][0] + muros1[cont1][0]) % 2 == 0 && muros1[cont1+1][1] - muros1[cont1][1] == -2) {
+                        if (i == muros1[cont1+1][1] && j == muros1[cont1+1][0]) {
+                            tablero[i][j] = "   #";
+                        }
+                        else if (i == muros1[cont1][1] && j == muros1[cont1][0]) {
+                            tablero[i][j] = "   #";
+                        } //fin if
                     } //fin if
-                }//fin if
+                    
+                    //Comprueba que los muros sean horizontales
+                    if (muros1[cont1][1] % 2 == 0 && muros1[cont1+1][0] - muros1[cont1][0] == 1) {
+                        if (i == muros1[cont1][1] && j == muros1[cont1][0]) {
+                            tablero[i][j] = "####";
+                        }
+                        else if (i == muros1[cont1+1][1] && j == muros1[cont1+1][0]) {
+                            tablero[i][j] = "####";
+                        } //fin if
+                    } //fin if
+                    else if (muros1[cont1+1][1] % 2 == 0 && muros1[cont1+1][0] - muros1[cont1][0] == -1) {
+                        if (i == muros1[cont1+1][1] && j == muros1[cont1+1][0]) {
+                            tablero[i][j] = "####";
+                        }
+                        else if (i == muros1[cont1][1] && j == muros1[cont1][0]) {
+                            tablero[i][j] = "####";
+                        } //fin if
+                    }//fin if
+                    cont1+= 2;
+                }//fin while
             }//fin for
         } //fin for
 

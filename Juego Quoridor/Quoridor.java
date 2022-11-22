@@ -8,11 +8,15 @@ public class Quoridor {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Variables objvar = new Variables();
         Tablero objtablero = new Tablero();
-        Jugadores jug1 = new Jugadores();
-        Jugadores jug2 = new Jugadores();
+        Jugadores jug1 = new Jugadores(4, 17, 4, 1);
+        Jugadores jug2 = new Jugadores(4, 17, 4, 1);
 
         //Declaracion de variables
-        int cont = 0, contar1 = 0, contar2 = 0;
+        int cont = 0, contar1 = 0, contar2 = 0, contar3 = 0, contar4 = 0;
+        int[][] registrarrecorrido1 = new int[150][2];
+        int[][] registrarrecorrido2 = new int[150][2];
+        int[][] muros1 = new int[20][2];
+        int[][] muros2 = new int[20][2];
         boolean gameover = true;
         String opc = "";
 
@@ -20,7 +24,7 @@ public class Quoridor {
         objvar.murosjug2 = 10;
         
         //Imprimir el tablero Quoridor
-        objtablero.CrearTablero(jug1, jug2, objvar.coordenadaX1, objvar.coordenadaY1, objvar.coordenadaX2, objvar.coordenadaY2);
+        objtablero.CrearTablero(jug1, jug2, muros1);
         objtablero.MostrarTablero(objtablero.tablero);
         System.out.println("\n");
         
@@ -64,14 +68,11 @@ public class Quoridor {
 
                                 opc = reader.readLine();
                                 validar = jug1.MoverFichaJugador1(opc, validar);
-                                Registros.RegistrarJugador1(jug1, contar1, opc);
                             } //fin if
                             
                             //Mostrar tablero
-                            objtablero.CrearTablero(jug1, jug2, objvar.coordenadaX1, objvar.coordenadaY1, objvar.coordenadaX2, objvar.coordenadaY2);
+                            objtablero.CrearTablero(jug1, jug2, muros1);
                             objtablero.MostrarTablero(objtablero.tablero);
-
-                            contar1++;
 
                             //Compara si el jugador1 ha llagado a la primera fila del tablero
                             if (jug1.getY1() == 1) {
@@ -89,15 +90,11 @@ public class Quoridor {
 
                                 opc = reader.readLine();
                                 validar = jug2.MoverFichaJugador2(opc, validar);
-                                Registros.RegistrarJugador2(jug2, contar2, opc);
                             }//fin while
                             
                             //Mostrar tablero
-                            objtablero.CrearTablero(jug1, jug2, objvar.coordenadaX1, objvar.coordenadaY1, objvar.coordenadaX2, objvar.coordenadaY2);
+                            objtablero.CrearTablero(jug1, jug2, muros1);
                             objtablero.MostrarTablero(objtablero.tablero);
-
-                            contar2++;
-
                             //Compara si el jugador2 ha llagado a la ultima fila del tablero
                             if (jug2.getY2() == 17) {
                                 System.out.println("El " + objvar.jugador1 + " ha ganado la partida");
@@ -127,6 +124,19 @@ public class Quoridor {
                                             && objvar.coordenadaY1 > 0 && objvar.coordenadaY1 < 18) && (objvar.coordenadaX2 >= 0 && objvar.coordenadaX2 < 8 && objvar.coordenadaY2 > 0 && objvar.coordenadaY2 < 18)) {
                                             
                                             /*Walls.PonerMuros(objvar.coordenadaX1, objvar.coordenadaY1, objvar.coordenadaX2, objvar.coordenadaY2);*/
+                                            while (true) {
+                                                muros1[contar3][0] = objvar.coordenadaX1;
+                                                muros1[contar3][1] = objvar.coordenadaY1;
+                                                contar3++;
+                                                muros1[contar3][0] = objvar.coordenadaX1;
+                                                muros1[contar3][1] = objvar.coordenadaY1;
+                                                contar3++;
+                                                break;
+                                            }
+
+                                            //Mostrar tablero
+                                            objtablero.CrearTablero(jug1, jug2, muros1);
+                                            objtablero.MostrarTablero(objtablero.tablero);
                                             validar = true;
                                             
                                             //Comprueba que los muros no ocupen más de dos casilla
@@ -206,8 +216,8 @@ public class Quoridor {
                         } //fin while
 
                         //Mostrar tablero
-                        objtablero.CrearTablero(jug1, jug2, objvar.coordenadaX1, objvar.coordenadaY1, objvar.coordenadaX2, objvar.coordenadaY2);
-                        objtablero.MostrarTablero(objtablero.tablero);
+                        //objtablero.CrearTablero(jug1, jug2, objvar.coordenadaX1, objvar.coordenadaY1, objvar.coordenadaX2, objvar.coordenadaY2);
+                        //objtablero.MostrarTablero(objtablero.tablero);
                         break;
                     }
                     default:
@@ -222,7 +232,26 @@ public class Quoridor {
             }//fin try-catch
         } //fin while
         
-        Registros.RegistrarJugador1(jug1, contar1, opc);
-        Registros.RegistrarJugador2(jug2, contar2, opc);
+        //Mostrar el recorrido del jugador1
+        System.out.println("Recorrido del jugador1");
+        System.out.println("x, y");
+        for (int i = 0; i < contar1; i++) {
+            for (int j = 0; j < 2; j++) {
+                System.out.print(registrarrecorrido1[contar1][j] + ", ");
+            } //fin for
+            System.out.print("\n");
+        } //fin for
+        
+        //Mostrar el recorrido del jugador2
+        System.out.println("\nRecorrido del jugador2");
+        System.out.println("x, y");
+        for (int i = 0; i < contar2; i++) {
+            for (int j = 0; j < 2; j++) {
+                System.out.print(registrarrecorrido2[contar2][j] + ", ");
+            } //fin for
+            System.out.print("\n");
+        }//fin for
+        /*Registros.RegistrarJugador1(jug1, contar1, opc);
+        Registros.RegistrarJugador2(jug2, contar2, opc);*/
     }//fin main
 }//fin class
