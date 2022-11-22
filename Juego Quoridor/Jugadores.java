@@ -1,23 +1,25 @@
+//Alexander Caballero 8-997-2227 || Nahin Mendoza 8-989-50 || Shaniska Walker 8-992-2056 || Camilo Yepes 20-14-6092
+
 public class Jugadores {
     public int coorx1, coory1, coorx2, coory2;
 
     //Constructor
     public Jugadores() {
-        coorx1 = 5;
-        coory1 = 9;
-        coorx2 = 5;
+        coorx1 = 4;
+        coory1 = 17;
+        coorx2 = 4;
         coory2 = 1;
     }//fin constructor
 
     public boolean MoverFichaJugador1(String opcion, boolean validar) {
         if (opcion.equals("1")) {
-            coory1--;
+            coory1-= 2;
             validar = true;
         }
         else if (opcion.equals("2")) {
             coorx1--;
             validar = true;
-            if (coorx1 == 0) {
+            if (coorx1 == -1) {
                 coorx1++;
                 System.out.println("Ficha no movida");
                 validar = false;
@@ -26,17 +28,17 @@ public class Jugadores {
         else if (opcion.equals("3")) {
             coorx1++;
             validar = true;
-            if (coorx1 == 10) {
+            if (coorx1 == 9) {
                 coorx1--;
                 System.out.println("Ficha no movida");
                 validar = false;
             }//fin if
         }
         else if (opcion.equals("4")) {
-            coory1++;
+            coory1+= 2;
             validar = true;
-            if (coory1 == 10) {
-                coory1--;
+            if (coory1 == 19) {
+                coory1-= 2;
                 System.out.println("Ficha no movida");
                 validar = false;
             }//fin if
@@ -50,10 +52,10 @@ public class Jugadores {
 
     public boolean MoverFichaJugador2(String opcion, boolean validar) {
         if (opcion.equals("1")) {
-            coory2--;
+            coory2-= 2;
             validar = true;
-            if (coory2 == 0) {
-                coory2++;
+            if (coory2 == -1) {
+                coory2+= 2;
                 System.out.println("Ficha no movida");
                 validar = false;
             }//fin if
@@ -61,23 +63,23 @@ public class Jugadores {
         else if (opcion.equals("2")) {
             coorx2--;
             validar = true;
-            if (coorx2 == 0) {
-                coorx2--;
+            if (coorx2 == -1) {
+                coorx2++;
                 System.out.println("Ficha no movida");
                 validar = false;
             }//fin if
         }
         else if (opcion.equals("3")) {
-            coorx2++;
+            coorx2++;;
             validar = true;
-            if (coorx2 == 10) {
+            if (coorx2 == 9) {
                 coorx2--;
                 System.out.println("Ficha no movida");
                 validar = false;
             }//fin if
         }
         else if (opcion.equals("4")) {
-            coory2++;
+            coory2+= 2;
             validar = true;
         }
         else {
