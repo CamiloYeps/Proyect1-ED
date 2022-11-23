@@ -30,6 +30,7 @@ public class Tablero {
                 else if (i == jug2.getY2() && j == jug2.getX2()) {
                     tablero[i][j] = (" o |");
                 } //fin if
+
                 while(cont1 != 20) {
                     //Comprueba que los muros sean verticales
                     if ((muros1[cont1][0] + muros1[cont1+1][0]) % 2 == 0 && muros1[cont1+1][1] - muros1[cont1][1] == 2) {
@@ -68,6 +69,44 @@ public class Tablero {
                     }//fin if
                     cont1+= 2;
                 }//fin while
+                /*while(cont1 != 20) {
+                    //Comprueba que los muros sean verticales
+                    if ((muros1[cont1][0] + muros1[cont1+1][0]) % 2 == 0 && muros1[cont1+1][1] - muros1[cont1][1] == 2) {
+                        if (i == muros1[cont1][1] && j == muros1[cont1][0]) {
+                            tablero[i][j] = "   #";
+                        }
+                        else if (i == muros1[cont1+1][1] && j == muros1[cont1+1][0]) {
+                            tablero[i][j] = "   #";
+                        } //fin if
+                    } //fin if
+                    else if ((muros1[cont1+1][0] + muros1[cont1][0]) % 2 == 0 && muros1[cont1+1][1] - muros1[cont1][1] == -2) {
+                        if (i == muros1[cont1+1][1] && j == muros1[cont1+1][0]) {
+                            tablero[i][j] = "   #";
+                        }
+                        else if (i == muros1[cont1][1] && j == muros1[cont1][0]) {
+                            tablero[i][j] = "   #";
+                        } //fin if
+                    } //fin if
+                    
+                    //Comprueba que los muros sean horizontales
+                    if (muros1[cont1][1] % 2 == 0 && muros1[cont1+1][0] - muros1[cont1][0] == 1) {
+                        if (i == muros1[cont1][1] && j == muros1[cont1][0]) {
+                            tablero[i][j] = "####";
+                        }
+                        else if (i == muros1[cont1+1][1] && j == muros1[cont1+1][0]) {
+                            tablero[i][j] = "####";
+                        } //fin if
+                    } //fin if
+                    else if (muros1[cont1+1][1] % 2 == 0 && muros1[cont1+1][0] - muros1[cont1][0] == -1) {
+                        if (i == muros1[cont1+1][1] && j == muros1[cont1+1][0]) {
+                            tablero[i][j] = "####";
+                        }
+                        else if (i == muros1[cont1][1] && j == muros1[cont1][0]) {
+                            tablero[i][j] = "####";
+                        } //fin if
+                    }//fin if
+                    cont1+= 2;
+                }//fin while*/
             }//fin for
         } //fin for
 
