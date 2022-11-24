@@ -8,250 +8,225 @@ public class Quoridor {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Variables objvar = new Variables();
         Tablero objtablero = new Tablero();
-        Jugadores jug1 = new Jugadores(4, 17, 4, 1);
-        Jugadores jug2 = new Jugadores(4, 17, 4, 1);
+        Jugadores jug1 = new Jugadores();
+        Jugadores jug2 = new Jugadores();
 
         //Declaracion de variables
-        int cont = 0, contar1 = 0, contar2 = 0, contar3 = 0, contar4 = 0;
-        int[][] registrarrecorrido1 = new int[150][2];
-        int[][] registrarrecorrido2 = new int[150][2];
-        int[][] muros1 = new int[20][2];
-        int[][] muros2 = new int[20][2];
+        int cont = 0;
         boolean gameover = true;
-        String opc = "";
+        String opc;
 
         objvar.murosjug1 = 10;
         objvar.murosjug2 = 10;
         
         //Imprimir el tablero Quoridor
-        objtablero.CrearTablero(jug1, jug2, muros1);
+        objtablero.CrearTablero(jug1, jug2, objvar.muros1, objvar.muros2);
         objtablero.MostrarTablero(objtablero.tablero);
         System.out.println("\n");
         
+        //Guarda la posición inicial de ambos jugadores
+        objvar.registro1.add(jug1.getX1());
+        objvar.registro1.add(jug1.getY1());
+        objvar.registro2.add(jug2.getX2());
+        objvar.registro2.add(jug2.getY2());
         while (gameover) {
-            try {
-                cont++;
-                boolean validar = false;
+            cont++;
+            boolean validar = false;
 
-                //Muestra el turno del jugador
-                if ((cont % 2) == 1) {
-                    System.out.println("Turno del " + objvar.jugador1);
-                }
-                else {
-                    System.out.println("Turno del " + objvar.jugador2);
-                }//fin if
-                System.out.println("1. Mover ficha");
-                System.out.println("2. Poner muro");
-                System.out.println("EXIT para retirarse");
-                System.out.print("Elija su opcion: ");
-                opc = reader.readLine();
+            //Muestra el turno del jugador y la posición en la que está
+            if ((cont % 2) == 1) {
+                System.out.println("Turno del " + objvar.jugador1);
+                System.out.println("Posicion actual de su ficha (x, y): " + jug1.getX1() + ", " + jug1.getY1());
+            }
+            else {
+                System.out.println("Turno del " + objvar.jugador2);
+                System.out.println("Posicion actual de su ficha (x, y): " + jug2.getX2() + ", " + jug1.getY2());
+            }//fin if
+            System.out.println("1. Mover ficha");
+            System.out.println("2. Poner muro");
+            System.out.println("3. EXIT para retirarse");
+            System.out.print("Elija su opcion: ");
+            opc = reader.readLine();
 
-                //Compara si los jugadores ha introducido EXIT
-                if (opc.equalsIgnoreCase("EXIT") && objvar.jugador1.equals("jugador 1")) {
-                    System.out.println("El ganador es el " + objvar.jugador2);
-                    gameover = false;
-                }
-                else if (opc.equalsIgnoreCase("EXIT") && objvar.jugador1.equals("jugador 2")){
-                    System.out.println("El ganador es el " + objvar.jugador1);
-                    gameover = false;
-                }//fin if
-
-                switch (opc) {
-                    case "1":
-                        if ((cont % 2) == 1) {
-                            while (!validar) {
-                                System.out.println("1. Mover hacia ARRIBA");
-                                System.out.println("2. Mover hacia IZQUIERDA");
-                                System.out.println("3. Mover hacia DERECHA");
-                                System.out.println("4. Mover hacia ABAJO");
-                                System.out.print("En que direccion desea desplazar la ficha: ");
-
-                                opc = reader.readLine();
-                                validar = jug1.MoverFichaJugador1(opc, validar);
-                            } //fin if
-                            
-                            //Mostrar tablero
-                            objtablero.CrearTablero(jug1, jug2, muros1);
-                            objtablero.MostrarTablero(objtablero.tablero);
-
-                            //Compara si el jugador1 ha llagado a la primera fila del tablero
-                            if (jug1.getY1() == 1) {
-                                System.out.println("El " + objvar.jugador1 + " ha ganado la partida");
-                                gameover = false;
-                            }
-                        }
-                        else {
-                            while (!validar) {
-                                System.out.println("1. Mover hacia ARRIBA");
-                                System.out.println("2. Mover hacia IZQUIERDA");
-                                System.out.println("3. Mover hacia DERECHA");
-                                System.out.println("4. Mover hacia ABAJO");
-                                System.out.print("En que direccion desea desplazar la ficha: ");
-
-                                opc = reader.readLine();
-                                validar = jug2.MoverFichaJugador2(opc, validar);
-                            }//fin while
-                            
-                            //Mostrar tablero
-                            objtablero.CrearTablero(jug1, jug2, muros1);
-                            objtablero.MostrarTablero(objtablero.tablero);
-                            //Compara si el jugador2 ha llagado a la ultima fila del tablero
-                            if (jug2.getY2() == 17) {
-                                System.out.println("El " + objvar.jugador1 + " ha ganado la partida");
-                                gameover = false;
-                            }
-                        }//fin if
-                        break;
-                    case "2": {
+            switch (opc) {
+                case "1":
+                    if ((cont % 2) == 1) {
                         while (!validar) {
-                            try {
-                                if ((cont % 2) == 1) {
-                                    //Comprobar la cantidad de muros
-                                    if (objvar.murosjug1 > 0 && objvar.murosjug1 <= 10) {
-                                        System.out.println("Introduzca las coordenadas donde desee colocar el muro");
-                                        System.out.print("Coordenada x1: ");
-                                        objvar.coordenadaX1 = Integer.parseInt(reader.readLine());
-                                        System.out.print("Coordenada y1: ");
-                                        objvar.coordenadaY1 = Integer.parseInt(reader.readLine());
+                            System.out.println("1. Mover hacia ARRIBA");
+                            System.out.println("2. Mover hacia IZQUIERDA");
+                            System.out.println("3. Mover hacia DERECHA");
+                            System.out.println("4. Mover hacia ABAJO");
+                            System.out.print("En que direccion desea desplazar la ficha: ");
 
-                                        System.out.print("Coordenada x2: ");
-                                        objvar.coordenadaX2 = Integer.parseInt(reader.readLine());
-                                        System.out.print("Coordenada y2: ");
-                                        objvar.coordenadaY2 = Integer.parseInt(reader.readLine());
+                            opc = reader.readLine();
+                            validar = jug1.MoverFichaJugador1(opc, validar);
+                        } //fin if
 
-                                        //Comprobar de que las coordenadas no se pasen de los limites del tablero
-                                        if ((objvar.coordenadaX1 >= 0 && objvar.coordenadaX1 < 8
-                                            && objvar.coordenadaY1 > 0 && objvar.coordenadaY1 < 18) && (objvar.coordenadaX2 >= 0 && objvar.coordenadaX2 < 8 && objvar.coordenadaY2 > 0 && objvar.coordenadaY2 < 18)) {
-                                            
-                                            /*Walls.PonerMuros(objvar.coordenadaX1, objvar.coordenadaY1, objvar.coordenadaX2, objvar.coordenadaY2);*/
-                                            while (true) {
-                                                muros1[contar3][0] = objvar.coordenadaX1;
-                                                muros1[contar3][1] = objvar.coordenadaY1;
-                                                contar3++;
-                                                muros1[contar3][0] = objvar.coordenadaX1;
-                                                muros1[contar3][1] = objvar.coordenadaY1;
-                                                contar3++;
-                                                break;
-                                            }
+                        //Guardar la posición actual del jugador1
+                        objvar.registro1.add(jug1.getX1());
+                        objvar.registro1.add(jug1.getY1());
 
-                                            //Mostrar tablero
-                                            objtablero.CrearTablero(jug1, jug2, muros1);
-                                            objtablero.MostrarTablero(objtablero.tablero);
-                                            validar = true;
-                                            
-                                            //Comprueba que los muros no ocupen más de dos casilla
-                                            /*if (objvar.coordenadaY2 - objvar.coordenadaY1 == 2 || objvar.coordenadaY2 - objvar.coordenadaY1 == -2) {
-                                                objvar.murosjug1--;
-                                                validar = true;
-                                            }
-                                            //Comprueba que los muros no ocupen más de dos casilla
-                                            if (objvar.coordenadaX2 - objvar.coordenadaX1 == 1 || objvar.coordenadaX2 - objvar.coordenadaX1 == -1) {
-                                                objvar.murosjug1--;
-                                                validar = true;
-                                            }
-                                            else {
-                                                System.out.println("Error al colocar los muros, intentelo nuevamente");
-                                                validar = false;
-                                            }//fin if*/
-                                        }
-                                        else {
-                                            System.out.println("el eje x tiene que ser menor a 8 y el eje y tiene que ser menor a 18");
-                                            cont--;
-                                            validar = false;
-                                        }//fin if
-                                    } 
-                                    else {
-                                        System.out.println("No tiene mas muros");
-                                    }//fin if
-                                }
-                                else {
-                                    //Comprobar la cantidad de muros
-                                    if (objvar.murosjug2 > 0 && objvar.murosjug2 <= 10) {
-                                        System.out.println("Introduzca las coordenadas donde desee colocar el muro");
-                                        System.out.print("Coordenada x1: ");
-                                        objvar.coordenadaX1 = Integer.parseInt(reader.readLine());
-                                        System.out.print("Coordenada y1: ");
-                                        objvar.coordenadaY1 = Integer.parseInt(reader.readLine());
-
-                                        System.out.print("Coordenada x2: ");
-                                        objvar.coordenadaX2 = Integer.parseInt(reader.readLine());
-                                        System.out.print("Coordenada y2: ");
-                                        objvar.coordenadaY2 = Integer.parseInt(reader.readLine());
-
-                                        //Comprobar de que las coordenadas no se pasen de los limites del tablero
-                                        if ((objvar.coordenadaX1 >= 0 && objvar.coordenadaX1 < 8
-                                                && objvar.coordenadaY1 > 0 && objvar.coordenadaY1 < 18)
-                                                || (objvar.coordenadaX2 >= 0 && objvar.coordenadaX2 < 8
-                                                        && objvar.coordenadaY2 > 0 && objvar.coordenadaY2 < 18)) {
-
-                                            //Comprueba que los muros no ocupen más de dos casilla y que sea vertical
-                                            if (objvar.coordenadaY2 - objvar.coordenadaY1 == 2
-                                                    || objvar.coordenadaY2 - objvar.coordenadaY1 == -2) {
-                                                objvar.murosjug1--;
-                                                validar = true;
-                                            }
-                                            //Comprueba que los muros no ocupen más de dos casilla y que sea horizontal
-                                            else if (objvar.coordenadaY2 % 2 == 0
-                                                    && objvar.coordenadaX2 - objvar.coordenadaX1 == 1
-                                                    || objvar.coordenadaX2 - objvar.coordenadaX1 == -1) {
-                                                objvar.murosjug1--;
-                                                validar = true;
-                                            } else {
-                                                System.out.println("Error al colocar los muros, intentelo nuevamente");
-                                                validar = false;
-                                            } //fin if
-                                        } 
-                                        else {
-                                            System.out.println("Las coordenadas no pueden superar el rango 8");
-                                        }//fin if
-                                    } 
-                                    else {
-                                        System.out.println("No tiene mas muros");
-                                    }//fin if
-                                }//fin if
-                            } catch (Exception e) {
-                                System.out.println("Introduzca bien las coordenadas");
-                                validar = false;
-                            }//fin try-catch
-                        } //fin while
-
-                        //Mostrar tablero
-                        //objtablero.CrearTablero(jug1, jug2, objvar.coordenadaX1, objvar.coordenadaY1, objvar.coordenadaX2, objvar.coordenadaY2);
-                        //objtablero.MostrarTablero(objtablero.tablero);
-                        break;
+                        //Compara si el jugador1 ha llagado a la primera fila del tablero
+                        if (jug1.getY1() == 1) {
+                            System.out.println("El " + objvar.jugador1 + " ha ganado la partida");
+                            gameover = false;
+                        }
                     }
-                    default:
-                        System.out.println("Opcion invalida");
-                        cont--;
-                        break;
-                }//fin switch case
-            } catch (Exception e) {
-                cont--;
-                System.out.println("Ha insertado una opcion incorrecta");
-                gameover = true;
-            }//fin try-catch
+                    else {
+                        while (!validar) {
+                            System.out.println("1. Mover hacia ARRIBA");
+                            System.out.println("2. Mover hacia IZQUIERDA");
+                            System.out.println("3. Mover hacia DERECHA");
+                            System.out.println("4. Mover hacia ABAJO");
+                            System.out.print("En que direccion desea desplazar la ficha: ");
+
+                            opc = reader.readLine();
+                            validar = jug2.MoverFichaJugador2(opc, validar);
+                        } //fin while
+                        
+                        //Guardar la posición actual del jugador1
+                        objvar.registro2.add(jug2.getX2());
+                        objvar.registro2.add(jug2.getY2());
+
+                        //Compara si el jugador2 ha llagado a la ultima fila del tablero
+                        if (jug2.getY2() == 17) {
+                            System.out.println("El " + objvar.jugador2 + " ha ganado la partida");
+                            gameover = false;
+                        }
+                    } //fin if
+                    //Mostrar tablero
+                    objtablero.CrearTablero(jug1, jug2, objvar.muros1, objvar.muros2);
+                    objtablero.MostrarTablero(objtablero.tablero);
+                    break;
+                
+                case "2": {
+                    do {
+                        try {
+                            if ((cont % 2) == 1) {
+                                //Comprobar la cantidad de muros
+                                if (objvar.murosjug1 > 0 && objvar.murosjug1 <= 10) {
+                                    System.out.println("Introduzca las coordenadas donde desee colocar el muro");
+                                    System.out.print("Coordenada x1: ");
+                                    objvar.x1 = Integer.parseInt(reader.readLine());
+                                    System.out.print("Coordenada y1: ");
+                                    objvar.y1 = Integer.parseInt(reader.readLine());
+
+                                    System.out.print("Coordenada x2: ");
+                                    objvar.x2 = Integer.parseInt(reader.readLine());
+                                    System.out.print("Coordenada y2: ");
+                                    objvar.y2 = Integer.parseInt(reader.readLine());
+
+                                    //Comprobar de que las coordenadas no se pasen de los limites del tablero
+                                    if ((objvar.x1 >= 0 && objvar.x1 < 8
+                                            && objvar.y1 > 0 && objvar.y1 < 18)
+                                            && (objvar.x2 >= 0 && objvar.x2 < 8 && objvar.y2 > 0
+                                                    && objvar.y2 < 18)) {
+
+                                        //Guardar la posición de los muros
+                                        objvar.muros1.add(objvar.x1);
+                                        objvar.muros1.add(objvar.y1);
+                                        objvar.muros1.add(objvar.x2);
+                                        objvar.muros1.add(objvar.y2);
+                                        objvar.murosjug1--;
+                                        validar = true;
+
+                                    } else {
+                                        System.out.println(
+                                                "el eje x tiene que ser menor a 8 y el eje y tiene que ser mayor a 0 y menor a 18");
+                                        validar = false;
+                                    } //fin if
+                                } else {
+                                    System.out.println("No tiene mas muros");
+                                } //fin if
+                            } 
+                            else {
+                                //Comprobar la cantidad de muros
+                                if (objvar.murosjug2 > 0 && objvar.murosjug2 <= 10) {
+                                    System.out.println("Introduzca las coordenadas donde desee colocar el muro");
+                                    System.out.print("Coordenada x1: ");
+                                    objvar.x1 = Integer.parseInt(reader.readLine());
+                                    System.out.print("Coordenada y1: ");
+                                    objvar.y1 = Integer.parseInt(reader.readLine());
+
+                                    System.out.print("Coordenada x2: ");
+                                    objvar.x2 = Integer.parseInt(reader.readLine());
+                                    System.out.print("Coordenada y2: ");
+                                    objvar.y2 = Integer.parseInt(reader.readLine());
+
+                                    //Comprobar de que las coordenadas no se pasen de los limites del tablero
+                                    if ((objvar.x1 >= 0 && objvar.x1 < 8
+                                            && objvar.y1 > 0 && objvar.y1 < 18)
+                                            && (objvar.x2 >= 0 && objvar.x2 < 8 && objvar.y2 > 0
+                                                    && objvar.y2 < 18)) {
+
+                                        //Guardar la posición de los muros
+                                        objvar.muros2.add(objvar.x1);
+                                        objvar.muros2.add(objvar.y1);
+                                        objvar.muros2.add(objvar.x2);
+                                        objvar.muros2.add(objvar.y2);
+                                        objvar.murosjug1--;
+                                        validar = true;
+
+                                    } 
+                                    else {
+                                        System.out.println("el eje x tiene que ser menor a 8 y el eje y tiene que ser mayor a 0 y menor a 18");
+                                        validar = false;
+                                    } //fin if
+                                } else {
+                                    System.out.println("No tiene mas muros");
+                                } //fin if
+                            } //fin if
+                        } catch (Exception e) {
+                            System.out.println("Introduzca bien las coordenadas");
+                            validar = false;
+                        } //fin try-catch
+                    } while (!validar); //fin while
+
+                    //Mostrar tablero
+                    objtablero.CrearTablero(jug1, jug2, objvar.muros1, objvar.muros2);
+                    objtablero.MostrarTablero(objtablero.tablero);
+                    break;
+                }
+                
+                case "3": {
+                    //Comprueba si uno de los jugadores ha introducido EXIT
+                    if ((cont % 2) == 1) {
+                        System.out.println("El ganador es " + objvar.jugador2);
+                    }
+                    else {
+                        System.out.println("El ganador es " + objvar.jugador1);
+                    } //fin if
+                    gameover = false;
+                }
+                default:
+                    System.out.println("Opcion invalida");
+                    cont--;
+                    break;
+            }//fin switch case
         } //fin while
-        
-        //Mostrar el recorrido del jugador1
-        System.out.println("Recorrido del jugador1");
+
+        //Mostrar recorrido del jugador1
         System.out.println("x, y");
-        for (int i = 0; i < contar1; i++) {
-            for (int j = 0; j < 2; j++) {
-                System.out.print(registrarrecorrido1[contar1][j] + ", ");
-            } //fin for
-            System.out.print("\n");
+        for (int i = 0; i < objvar.registro1.size(); i++) {
+            if (i % 2 == 0) {
+                System.out.print(objvar.registro1.get(i) + ", ");
+            }
+            else {
+                System.out.println(objvar.registro1.get(i));
+            }//fin if
         } //fin for
         
-        //Mostrar el recorrido del jugador2
-        System.out.println("\nRecorrido del jugador2");
+        System.out.print("\n");
+
+        //Mostrar recorrido del jugador2
         System.out.println("x, y");
-        for (int i = 0; i < contar2; i++) {
-            for (int j = 0; j < 2; j++) {
-                System.out.print(registrarrecorrido2[contar2][j] + ", ");
-            } //fin for
-            System.out.print("\n");
+        for (int i = 0; i < objvar.registro2.size(); i++) {
+            if (i % 2 == 0) {
+                System.out.print(objvar.registro2.get(i) + ", ");
+            }
+            else {
+                System.out.println(objvar.registro2.get(i));
+            }//fin if
         }//fin for
-        /*Registros.RegistrarJugador1(jug1, contar1, opc);
-        Registros.RegistrarJugador2(jug2, contar2, opc);*/
     }//fin main
 }//fin class
