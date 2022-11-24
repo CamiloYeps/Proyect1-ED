@@ -20,8 +20,8 @@ public class Quoridor {
         objvar.murosjug2 = 10;
         
         //Imprimir el tablero Quoridor
-        objtablero.CrearTablero(jug1, jug2, objvar.muros1, objvar.muros2);
-        objtablero.MostrarTablero(objtablero.tablero);
+        objtablero.CrearTablero(jug1, jug2, objvar.x1, objvar.y1, objvar.x2, objvar.y2);
+        objtablero.MostrarTablero();
         System.out.println("\n");
         
         //Guarda la posición inicial de ambos jugadores
@@ -95,84 +95,71 @@ public class Quoridor {
                         }
                     } //fin if
                     //Mostrar tablero
-                    objtablero.CrearTablero(jug1, jug2, objvar.muros1, objvar.muros2);
-                    objtablero.MostrarTablero(objtablero.tablero);
+                    objtablero.CrearTablero(jug1, jug2, objvar.x1, objvar.y1, objvar.x2, objvar.y2);
+                    objtablero.MostrarTablero();
                     break;
                 
                 case "2": {
-                    do {
+                    while (!validar) {
                         try {
                             if ((cont % 2) == 1) {
                                 //Comprobar la cantidad de muros
-                                if (objvar.murosjug1 > 0 && objvar.murosjug1 <= 10) {
+                                if (objvar.murosjug1 > 0) {
                                     System.out.println("Introduzca las coordenadas donde desee colocar el muro");
                                     System.out.print("Coordenada x1: ");
                                     objvar.x1 = Integer.parseInt(reader.readLine());
                                     System.out.print("Coordenada y1: ");
                                     objvar.y1 = Integer.parseInt(reader.readLine());
-
-                                    System.out.print("Coordenada x2: ");
+                                    System.out.print("Coordenada x1: ");
                                     objvar.x2 = Integer.parseInt(reader.readLine());
-                                    System.out.print("Coordenada y2: ");
+                                    System.out.print("Coordenada y1: ");
                                     objvar.y2 = Integer.parseInt(reader.readLine());
 
                                     //Comprobar de que las coordenadas no se pasen de los limites del tablero
-                                    if ((objvar.x1 >= 0 && objvar.x1 < 8
-                                            && objvar.y1 > 0 && objvar.y1 < 18)
-                                            && (objvar.x2 >= 0 && objvar.x2 < 8 && objvar.y2 > 0
-                                                    && objvar.y2 < 18)) {
-
-                                        //Guardar la posición de los muros
-                                        objvar.muros1.add(objvar.x1);
-                                        objvar.muros1.add(objvar.y1);
-                                        objvar.muros1.add(objvar.x2);
-                                        objvar.muros1.add(objvar.y2);
+                                    if (objvar.x1 >= 0 && objvar.x1 < 8 && objvar.y1 > 0 && objvar.y1 < 18
+                                        && objvar.x2 >= 0 && objvar.x2 < 8 && objvar.y2 > 0 && objvar.y2 < 18) {
+                                        //Mostrar tablero
+                                        objtablero.CrearTablero(jug1, jug2, objvar.x1, objvar.y1, objvar.x2, objvar.y2);
+                                        objtablero.MostrarTablero();
                                         objvar.murosjug1--;
                                         validar = true;
-
                                     } else {
                                         System.out.println(
                                                 "el eje x tiene que ser menor a 8 y el eje y tiene que ser mayor a 0 y menor a 18");
                                         validar = false;
                                     } //fin if
-                                } else {
+                                } 
+                                else {
                                     System.out.println("No tiene mas muros");
                                 } //fin if
                             } 
                             else {
                                 //Comprobar la cantidad de muros
-                                if (objvar.murosjug2 > 0 && objvar.murosjug2 <= 10) {
+                                if (objvar.murosjug2 > 0) {
                                     System.out.println("Introduzca las coordenadas donde desee colocar el muro");
                                     System.out.print("Coordenada x1: ");
                                     objvar.x1 = Integer.parseInt(reader.readLine());
                                     System.out.print("Coordenada y1: ");
                                     objvar.y1 = Integer.parseInt(reader.readLine());
-
-                                    System.out.print("Coordenada x2: ");
+                                    System.out.print("Coordenada x1: ");
                                     objvar.x2 = Integer.parseInt(reader.readLine());
-                                    System.out.print("Coordenada y2: ");
+                                    System.out.print("Coordenada y1: ");
                                     objvar.y2 = Integer.parseInt(reader.readLine());
 
                                     //Comprobar de que las coordenadas no se pasen de los limites del tablero
-                                    if ((objvar.x1 >= 0 && objvar.x1 < 8
-                                            && objvar.y1 > 0 && objvar.y1 < 18)
-                                            && (objvar.x2 >= 0 && objvar.x2 < 8 && objvar.y2 > 0
-                                                    && objvar.y2 < 18)) {
-
-                                        //Guardar la posición de los muros
-                                        objvar.muros2.add(objvar.x1);
-                                        objvar.muros2.add(objvar.y1);
-                                        objvar.muros2.add(objvar.x2);
-                                        objvar.muros2.add(objvar.y2);
-                                        objvar.murosjug1--;
+                                    if (objvar.x1 >= 0 && objvar.x1 < 8 && objvar.y1 > 0 && objvar.y1 < 18
+                                        && objvar.x2 >= 0 && objvar.x2 < 8 && objvar.y2 > 0 && objvar.y2 < 18) {
+                                        //Mostrar tablero
+                                        objtablero.CrearTablero(jug1, jug2, objvar.x1, objvar.y1, objvar.x2, objvar.y2);
+                                        objtablero.MostrarTablero();
+                                        objvar.murosjug2--;
                                         validar = true;
-
-                                    } 
-                                    else {
-                                        System.out.println("el eje x tiene que ser menor a 8 y el eje y tiene que ser mayor a 0 y menor a 18");
+                                    } else {
+                                        System.out.println( "el eje x tiene que ser menor a 8 y el eje y tiene que ser mayor a 0 y menor a 18");
                                         validar = false;
                                     } //fin if
-                                } else {
+                                } 
+                                else {
                                     System.out.println("No tiene mas muros");
                                 } //fin if
                             } //fin if
@@ -180,11 +167,7 @@ public class Quoridor {
                             System.out.println("Introduzca bien las coordenadas");
                             validar = false;
                         } //fin try-catch
-                    } while (!validar); //fin while
-
-                    //Mostrar tablero
-                    objtablero.CrearTablero(jug1, jug2, objvar.muros1, objvar.muros2);
-                    objtablero.MostrarTablero(objtablero.tablero);
+                    }//fin while
                     break;
                 }
                 

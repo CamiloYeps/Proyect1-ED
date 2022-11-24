@@ -8,6 +8,4 @@ public class Variables {
     int murosjug1, murosjug2;
     ArrayList<Integer> registro1 = new ArrayList<Integer>();
     ArrayList<Integer> registro2 = new ArrayList<Integer>();
-    ArrayList<Integer> muros1 = new ArrayList<Integer>();
-    ArrayList<Integer> muros2 = new ArrayList<Integer>();
 }
