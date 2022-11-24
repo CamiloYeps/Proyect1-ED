@@ -74,14 +74,6 @@ public class Tablero {
 
     //metodo para mostrar el tablero
     public void MostrarTablero() {
-
-        //variables a usar
-        /*String[][] board = new String[19][9];
-        for (int i = 0; i < 19; i++) {
-            for (int j = 0; j < 9; j++) {
-                board[i][j] = tablero[i][j];
-            }
-        }/* */
         //Imprimir el tablero
         for (int i = 0; i < 19; i++) {
             if (i != 0 && i != 18) {
